@@ -1,12 +1,12 @@
-package ru.danil.reflection.converter;
+package ru.danil.simple.converter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ReflectionConverterApplication {
+public class SimpleConverterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ReflectionConverterApplication.class, args);
+		SpringApplication.run(SimpleConverterApplication.class, args);
 	}
 }
