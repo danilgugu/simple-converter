@@ -80,7 +80,7 @@ public class SimpleObjectsConverterTest {
 	}
 
 	@Test
-	void convertClassWithDifferentFiledNames() {
+	void convertClassUsingCustomConverter() {
 		Car input = Car.builder()
 				.id(1L)
 				.make("Tesla")
