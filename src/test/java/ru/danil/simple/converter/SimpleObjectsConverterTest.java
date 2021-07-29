@@ -79,7 +79,7 @@ public class SimpleObjectsConverterTest {
 		assertEquals(outputRole.getName(), inputRole.getName());
 	}
 
-	//@Test not works jet
+	@Test
 	void convertClassWithDifferentFiledNames() {
 		Car input = Car.builder()
 				.id(1L)
