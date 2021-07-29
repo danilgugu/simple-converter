@@ -79,8 +79,8 @@ public class SimpleObjectsConverterTest {
 		assertEquals(outputRole.getName(), inputRole.getName());
 	}
 
-	//@Test not works jet
-	void convertClassWithDifferentFiledNames() {
+	@Test
+	void convertClassUsingCustomConverter() {
 		Car input = Car.builder()
 				.id(1L)
 				.make("Tesla")
