@@ -62,8 +62,8 @@ public class SimpleObjectsConverterTest {
 
 		UserRole output = converter.convert(input, UserRole.class);
 
-		UserEntity inputUser = input.getUser();
-		RoleEntity inputRole = input.getRole();
+		UserEntity inputUser = input.getUserEntity();
+		RoleEntity inputRole = input.getRoleEntity();
 		User outputUser = output.getUser();
 		Role outputRole = output.getRole();
 
