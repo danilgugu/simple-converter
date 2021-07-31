@@ -41,6 +41,21 @@ public class SimpleObjectsConverterTest {
 	}
 
 	@Test
+	void convertClassUsingCustomConverter() {
+		Car input = Car.builder()
+				.id(1L)
+				.make("Tesla")
+				.model("model S")
+				.build();
+
+		CarDTO output = converter.convert(input, CarDTO.class);
+
+		assertEquals(input.getId(), output.getCarId());
+		assertEquals(input.getMake(), output.getMake());
+		assertEquals(input.getModel(), output.getModelName());
+	}
+
+	@Test
 	void convertClassWithNestedStructure() {
 		UserRoleEntity input = UserRoleEntity.create(
 				UserEntity.build(
@@ -77,20 +92,5 @@ public class SimpleObjectsConverterTest {
 		assertEquals(outputRole.getId(), inputRole.getId());
 		assertEquals(outputRole.getUuid(), inputRole.getUuid());
 		assertEquals(outputRole.getName(), inputRole.getName());
-	}
-
-	@Test
-	void convertClassUsingCustomConverter() {
-		Car input = Car.builder()
-				.id(1L)
-				.make("Tesla")
-				.model("model S")
-				.build();
-
-		CarDTO output = converter.convert(input, CarDTO.class);
-
-		assertEquals(input.getId(), output.getCarId());
-		assertEquals(input.getMake(), output.getMake());
-		assertEquals(input.getModel(), output.getModelName());
 	}
 }
