@@ -18,8 +18,8 @@ public class UserRoleEntity {
 	}
 
 	@NotNull
-	private UserEntity user;
+	private UserEntity userEntity;
 
 	@NotNull
-	private RoleEntity role;
+	private RoleEntity roleEntity;
 }
