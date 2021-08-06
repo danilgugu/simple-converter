@@ -1,20 +1,27 @@
 package ru.danil.simple.converter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.context.annotation.Bean;
+import ru.danil.simple.converter.custom.Converter;
+import ru.danil.simple.converter.impl.CustomizableConversionServiceImpl;
 import ru.danil.simple.converter.model.*;
 
 import java.time.LocalDate;
+import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class SimpleObjectsConverterTest {
+public class CustomizableConversionServiceImplTest {
 
 	@Autowired
-	private SimpleObjectsConverter converter;
+	private ConversionService conversionService;
 
 	@Test
 	void convertPlaneClass() {
@@ -29,7 +36,7 @@ public class SimpleObjectsConverterTest {
 				"a.petrov@rambler.ru"
 		);
 
-		User output = converter.convert(input, User.class);
+		User output = conversionService.convert(input, User.class);
 
 		assertEquals(output.getId(), input.getId());
 		assertEquals(output.getUuid(), input.getUuid());
@@ -48,7 +55,7 @@ public class SimpleObjectsConverterTest {
 				.model("model S")
 				.build();
 
-		CarDTO output = converter.convert(input, CarDTO.class);
+		CarDTO output = conversionService.convert(input, CarDTO.class);
 
 		assertEquals(input.getId(), output.getCarId());
 		assertEquals(input.getMake(), output.getMake());
@@ -75,7 +82,7 @@ public class SimpleObjectsConverterTest {
 				)
 		);
 
-		UserRole output = converter.convert(input, UserRole.class);
+		UserRole output = conversionService.convert(input, UserRole.class);
 
 		UserEntity inputUser = input.getUserEntity();
 		RoleEntity inputRole = input.getRoleEntity();
@@ -92,5 +99,14 @@ public class SimpleObjectsConverterTest {
 		assertEquals(outputRole.getId(), inputRole.getId());
 		assertEquals(outputRole.getUuid(), inputRole.getUuid());
 		assertEquals(outputRole.getName(), inputRole.getName());
+	}
+
+	@TestConfiguration
+	static class TestConfig {
+
+		@Bean
+		ConversionService conversionService(ObjectMapper mapper, Map<Pair<Class<?>, Class<?>>, Converter<?, ?>> convertersMap) {
+			return new CustomizableConversionServiceImpl(mapper, convertersMap);
+		}
 	}
 }

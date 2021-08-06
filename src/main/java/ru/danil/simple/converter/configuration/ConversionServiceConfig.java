@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Configuration
-public class CustomConvertersMapConfig {
+public class ConversionServiceConfig {
 
 	@Bean
 	public Map<Pair<Class<?>, Class<?>>, Converter<?, ?>> convertersMap(List<Converter<?, ?>> customConverters) {
